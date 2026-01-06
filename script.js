@@ -53,7 +53,26 @@ function openModal() {
 }
 
 function closeModal() { 
+    // 1. Ocultar el modal principal
     document.getElementById('distribuidorModal').style.display = 'none'; 
+    
+    // 2. Esperar un poco (300ms) para que la animación visual termine y luego resetear todo
+    // Esto evita que el usuario vea el cambio brusco mientras se cierra
+    setTimeout(() => {
+        // A. Volver a mostrar el formulario
+        document.getElementById('modal-step-form').style.display = 'block';
+        
+        // B. Ocultar el mensaje de éxito
+        document.getElementById('modal-step-success').style.display = 'none';
+        
+        // C. Limpiar los campos escritos (input reset)
+        document.getElementById('formB2B').reset();
+
+        // D. Reactivar el botón de envío (por si quedó desactivado)
+        const btn = document.getElementById('btnSubmit');
+        btn.disabled = false;
+        btn.innerText = "Enviar Solicitud";
+    }, 300);
 }
 
 // Cerrar al hacer clic fuera del modal (en el fondo oscuro)
